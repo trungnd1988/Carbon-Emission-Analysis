@@ -70,3 +70,84 @@ limit 10;
 | 9  | France       | 
 | 10 | Germany      | 
 
+### Find Duplicate
+```sql
+select *, count(*) as count_duplicate
+from product_emissions
+group by 
+	id,
+	company_id,
+	country_id
+	industry_group_id,
+	year,
+	product_name,
+	weight_kg,
+	carbon_footprint_pcf,
+	upstream_percent_total_pcf,
+	operations_percent_total_pcf,
+	downstream_percent_total_pcf
+having count(*) > 1;
+```
+171 dong trung lap
+
+### 1Which products contribute the most to carbon emissions? 
+```sql
+select product_name,round(avg(carbon_footprint_pcf))
+from product_emissions
+group by product_name
+order by round(avg(carbon_footprint_pcf)) desc;
+```
+| product_name                                                                                                                       | round(avg(carbon_footprint_pcf)) | 
+| ---------------------------------------------------------------------------------------------------------------------------------: | -------------------------------: | 
+| Wind Turbine G128 5 Megawats                                                                                                       | 3718044                          | 
+| Wind Turbine G132 5 Megawats                                                                                                       | 3276187                          | 
+| Wind Turbine G114 2 Megawats                                                                                                       | 1532608                          | 
+| Wind Turbine G90 2 Megawats                                                                                                        | 1251625                          | 
+| Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.                                                                 | 191687                           | 
+| Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall | 167000                           | 
+| TCDE                                                                                                                               | 99075                            | 
+| Mercedes-Benz GLE (GLE 500 4MATIC)                                                                                                 | 91000                            | 
+| Mercedes-Benz S-Class (S 500)                                                                                                      | 85000                            | 
+| Mercedes-Benz SL (SL 350)                                                                                                          | 72000                            | 
+
+### 2. What are the industry groups of these products?
+```sql
+select p.product_name, i.industry_group
+from product_emissions p
+join industry_groups i on i.id=p.industry_group_id
+limit 10;
+```
+| product_name                         | industry_group                                       | 
+| -----------------------------------: | ---------------------------------------------------: | 
+| Embody Chair                         | "Consumer Durables, Household and Personal Products" | 
+| Caper Stacking Chair                 | "Consumer Durables, Household and Personal Products" | 
+| Aeron Chair                          | "Consumer Durables, Household and Personal Products" | 
+| Mirra 2 Chair                        | "Consumer Durables, Household and Personal Products" | 
+| "Sayl Work Chair, Suspension Back"   | "Consumer Durables, Household and Personal Products" | 
+| Setu Multipurpose Chair with Lyris 2 | "Consumer Durables, Household and Personal Products" | 
+| Celle Chair                          | "Consumer Durables, Household and Personal Products" | 
+| Vaccum Cleaners                      | "Consumer Durables, Household and Personal Products" | 
+| Frosted Flakes(R) Cereal             | "Food, Beverage & Tobacco"                           | 
+| White crystalline sugar              | "Food, Beverage & Tobacco"                           |
+
+### 3. What are the industries with the highest contribution to carbon emissions?
+```sql
+select c.country_name, avg(p.carbon_footprint_pcf)
+from product_emissions p
+join countries c on c.id=p.country_id
+group by c.country_name
+order by p.carbon_footprint_pcf desc
+limit 10;
+```
+| country_name | avg(p.carbon_footprint_pcf) | 
+| -----------: | --------------------------: | 
+| Germany      | 33600.3731                  | 
+| South Korea  | 5665.6061                   | 
+| Brazil       | 9407.6111                   | 
+| Japan        | 4600.2606                   | 
+| India        | 1535.8750                   | 
+| Netherlands  | 2011.9143                   | 
+| France       | 129.2857                    | 
+| South Africa | 1119.2727                   | 
+| Ireland      | 855.0000                    | 
+| Indonesia    | 721.0000                    | 
