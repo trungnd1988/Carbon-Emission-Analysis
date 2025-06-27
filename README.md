@@ -6,14 +6,14 @@ This report aims to analyze carbon emissions to examine the carbon footprint acr
 Carbon emissions play a crucial role in the environment, accounting for over 75% of global emissions and posing a significant environmental challenge. These emissions contribute to the accumulation of greenhouse gases in the atmosphere, leading to climate change, planetary warming, and involvement in various environmental disasters.
 
 Through this analysis, we hope to gain an understanding of the environmental impact of different industries and contribute to making informed decisions in sustainable development.
-##Data Source: Where Our Data Comes From
+## Data Source: Where Our Data Comes From
 Our dataset is compiled from publicly available data from nature.com and encompasses the product carbon footprints (PCF) for various companies. PCFs represent the greenhouse gas emissions associated with specific products, quantified in CO2 (carbon dioxide equivalent).
 
-##Data Structure
+## Data Structure
 The dataset consists of 4 tables containing information regarding carbon emissions generated during the production of goods.
 ![image](https://github.com/user-attachments/assets/8e138585-8d0c-42ee-b1a3-528701d1b098)
-##Data Exploring
-###Table 'product_emissions'
+## Data Exploring
+### Table 'product_emissions'
 ```sql
 select *
 from product_emissions
@@ -32,7 +32,7 @@ limit 10;
 | 10661-10-2014 | 85         | 28         | 11                | 2014 | Regular Straight 505® Jeans – Steel (Water                      | 0.7665    | 15                   | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | 
 | 10661-10-2015 | 85         | 28         | 6                 | 2015 | Regular Straight 505® Jeans – Steel (Water                      | 0.7665    | 15                   | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | 
 
-###Table 'industry_groups'
+### Table 'industry_groups'
 ```sql
 select *
 from companies
@@ -51,7 +51,7 @@ limit 10;
 | 9  | "Fuji Xerox Co., Ltd."                         | 
 | 10 | "Gamesa Corporación Tecnológica, S.A."         | 
 
-###Table 'countries'
+### Table 'countries'
 ```sql
 select *
 from countries
