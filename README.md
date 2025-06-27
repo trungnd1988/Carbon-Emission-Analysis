@@ -12,9 +12,10 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 ![image](https://github.com/user-attachments/assets/8e138585-8d0c-42ee-b1a3-528701d1b098)
 ##Data Exploring
 ###Table 'product_emissions'
-select *
+```select *
 from product_emissions
 limit 10;
+```
 | id            | company_id | country_id | industry_group_id | year | product_name                                                    | weight_kg | carbon_footprint_pcf | upstream_percent_total_pcf                       | operations_percent_total_pcf                     | downstream_percent_total_pcf                     | 
 | ------------: | ---------: | ---------: | ----------------: | ---: | --------------------------------------------------------------: | --------: | -------------------: | -----------------------------------------------: | -----------------------------------------------: | -----------------------------------------------: | 
 | 10056-1-2014  | 82         | 28         | 2                 | 2014 | Frosted Flakes(R) Cereal                                        | 0.7485    | 2                    | 57.50                                            | 30.00                                            | 12.50                                            | 
