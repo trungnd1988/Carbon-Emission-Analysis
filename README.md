@@ -178,24 +178,24 @@ limit 10;
 
 ### 5. What are the countries with the highest contribution to carbon emissions?
 ```sql
-select c.country_name, avg(p.carbon_footprint_pcf)
+select c.country_name, sum(p.carbon_footprint_pcf) as 'Carbon Emission'
 from product_emissions p
 join countries c on c.id=p.country_id
 group by c.country_name
-order by p.carbon_footprint_pcf desc
+order by sum(p.carbon_footprint_pcf) desc
 limit 10;
 ```
-| country_name | avg(p.carbon_footprint_pcf) | 
-| -----------: | --------------------------: | 
-| Germany      | 33600.3731                  | 
-| South Korea  | 5665.6061                   | 
-| Brazil       | 9407.6111                   | 
-| Japan        | 4600.2606                   | 
-| India        | 1535.8750                   | 
-| Netherlands  | 2011.9143                   | 
-| France       | 129.2857                    | 
-| South Africa | 1119.2727                   | 
-| Ireland      | 855.0000                    | 
-| Indonesia    | 721.0000                    | 
+| country_name | Carbon Emission | 
+| -----------: | --------------: | 
+| Spain        | 9786130         | 
+| Germany      | 2251225         | 
+| Japan        | 653237          | 
+| USA          | 518381          | 
+| South Korea  | 186965          | 
+| Brazil       | 169337          | 
+| Luxembourg   | 167007          | 
+| Netherlands  | 70417           | 
+| Taiwan       | 62875           | 
+| India        | 24574           | 
 
 ### 6. What is the trend of carbon footprints (PCFs) over the years?
