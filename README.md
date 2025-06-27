@@ -134,6 +134,50 @@ limit 10;
 
 ### 3. What are the industries with the highest contribution to carbon emissions?
 ```sql
+select i.industry_group, sum(p.carbon_footprint_pcf) as 'Carbon Emission'
+from industry_groups i
+join product_emissions p on i.id=p.industry_group_id
+group by i.industry_group
+order by p.carbon_footprint_pcf desc
+limit 10;
+```
+| industry_group                                                         | Carbon Emission | 
+| ---------------------------------------------------------------------: | --------------: | 
+| Automobiles & Components                                               | 2582264         | 
+| "Pharmaceuticals, Biotechnology & Life Sciences"                       | 72486           | 
+| Chemicals                                                              | 62369           | 
+| Materials                                                              | 577595          | 
+| Media                                                                  | 23017           | 
+| "Mining - Iron, Aluminum, Other Metals"                                | 8181            | 
+| Technology Hardware & Equipment                                        | 363776          | 
+| Containers & Packaging                                                 | 2988            | 
+| "Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber" | 8909            | 
+| Commercial & Professional Services                                     | 5265            | 
+
+### 4. What are the companies with the highest contribution to carbon emissions?
+```sql
+select c.company_name, p.carbon_footprint_pcf
+from companies c
+join product_emissions p on c.id=p.company_id
+group by c.company_name
+order by round(sum(p.carbon_footprint_pcf)) desc
+limit 10;
+```
+| company_name                            | carbon_footprint_pcf | 
+| --------------------------------------: | -------------------: | 
+| "Gamesa Corporación Tecnológica, S.A."  | 1251625              | 
+| Daimler AG                              | 57100                | 
+| Volkswagen AG                           | 21725                | 
+| "Mitsubishi Gas Chemical Company, Inc." | 200                  | 
+| "Hino Motors, Ltd."                     | 191687               | 
+| Arcelor Mittal                          | 7                    | 
+| Weg S/A                                 | 53058                | 
+| General Motors Company                  | 27588                | 
+| "Lexmark International, Inc."           | 1616                 | 
+| "Daikin Industries, Ltd."               | 3653                 | 
+
+### 5. What are the countries with the highest contribution to carbon emissions?
+```sql
 select c.country_name, avg(p.carbon_footprint_pcf)
 from product_emissions p
 join countries c on c.id=p.country_id
@@ -154,3 +198,4 @@ limit 10;
 | Ireland      | 855.0000                    | 
 | Indonesia    | 721.0000                    | 
 
+### 6. What is the trend of carbon footprints (PCFs) over the years?
