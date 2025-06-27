@@ -199,3 +199,48 @@ limit 10;
 | India        | 24574           | 
 
 ### 6. What is the trend of carbon footprints (PCFs) over the years?
+```sql
+select year, round(sum(carbon_footprint_pcf),2) as 'Carbon Emission'
+from product_emissions
+group by year 
+;
+```
+| year | Carbon Emission | 
+| ---: | --------------: | 
+| 2013 | 503857.00       | 
+| 2014 | 624226.00       | 
+| 2015 | 10840415.00     | 
+| 2016 | 1640182.00      | 
+| 2017 | 340271.00       | 
+
+### 7. Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
+```sql
+select  
+ 		i.industry_group as ' Industry Group',
+		sum(case when p.year = 2013 then p.carbon_footprint_pcf else 0 end) as '2013 Carbon Emission',
+		sum(case when p.year = 2014 then p.carbon_footprint_pcf else 0 end) as '2014 Carbon Emission',
+		sum(case when p.year = 2015 then p.carbon_footprint_pcf else 0 end) as '2015 Carbon Emission',	
+		sum(case when p.year = 2016 then p.carbon_footprint_pcf else 0 end) as '2016 Carbon Emission',	
+		sum(case when p.year = 2017 then p.carbon_footprint_pcf else 0 end) as '2017 Carbon Emission'
+from product_emissions p
+left join industry_groups i on i.id=p.industry_group_id
+group by i.industry_group
+order by 
+	'2013 Carbon Emission',
+	'2014 Carbon Emission',
+	'2015 Carbon Emission',
+	'2016 Carbon Emission',
+	'2017 Carbon Emission';
+```
+| Industry Group                                 | 2013 Carbon Emission | 2014 Carbon Emission | 2015 Carbon Emission | 2016 Carbon Emission | 2017 Carbon Emission | 
+| ---------------------------------------------: | -------------------: | -------------------: | -------------------: | -------------------: | -------------------: | 
+| "Food, Beverage & Tobacco"                     | 4995                 | 2685                 | 0                    | 100289               | 3162                 | 
+| Food & Beverage Processing                     | 0                    | 0                    | 141                  | 0                    | 0                    | 
+| Capital Goods                                  | 60190                | 93699                | 3505                 | 6369                 | 94949                | 
+| Technology Hardware & Equipment                | 61100                | 167361               | 106157               | 1566                 | 27592                | 
+| Materials                                      | 200513               | 75678                | 0                    | 88267                | 213137               | 
+| Consumer Durables & Apparel                    | 2867                 | 3280                 | 0                    | 1162                 | 0                    | 
+| "Textiles, Apparel, Footwear and Luxury Goods" | 0                    | 0                    | 387                  | 0                    | 0                    | 
+| Software & Services                            | 6                    | 146                  | 22856                | 22846                | 690                  | 
+| Chemicals                                      | 0                    | 0                    | 62369                | 0                    | 0                    | 
+| Semiconductors & Semiconductor Equipment       | 0                    | 50                   | 0                    | 4                    | 0                    | 
