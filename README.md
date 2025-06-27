@@ -90,7 +90,7 @@ having count(*) > 1;
 ```
 171 dong trung lap
 
-### 1Which products contribute the most to carbon emissions? 
+### 1. Which products contribute the most to carbon emissions? 
 ```sql
 select product_name,round(avg(carbon_footprint_pcf))
 from product_emissions
@@ -112,23 +112,25 @@ order by round(avg(carbon_footprint_pcf)) desc;
 
 ### 2. What are the industry groups of these products?
 ```sql
-select p.product_name, i.industry_group
+select p.product_name, i.industry_group, round(avg(p.carbon_footprint_pcf)) as 'carbon emission'
 from product_emissions p
 join industry_groups i on i.id=p.industry_group_id
+group by product_name
+order by round(avg(carbon_footprint_pcf)) desc
 limit 10;
 ```
-| product_name                         | industry_group                                       | 
-| -----------------------------------: | ---------------------------------------------------: | 
-| Embody Chair                         | "Consumer Durables, Household and Personal Products" | 
-| Caper Stacking Chair                 | "Consumer Durables, Household and Personal Products" | 
-| Aeron Chair                          | "Consumer Durables, Household and Personal Products" | 
-| Mirra 2 Chair                        | "Consumer Durables, Household and Personal Products" | 
-| "Sayl Work Chair, Suspension Back"   | "Consumer Durables, Household and Personal Products" | 
-| Setu Multipurpose Chair with Lyris 2 | "Consumer Durables, Household and Personal Products" | 
-| Celle Chair                          | "Consumer Durables, Household and Personal Products" | 
-| Vaccum Cleaners                      | "Consumer Durables, Household and Personal Products" | 
-| Frosted Flakes(R) Cereal             | "Food, Beverage & Tobacco"                           | 
-| White crystalline sugar              | "Food, Beverage & Tobacco"                           |
+| product_name                                                                                                                       | industry_group                     | carbon emission | 
+| ---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------: | --------------: | 
+| Wind Turbine G128 5 Megawats                                                                                                       | Electrical Equipment and Machinery | 3718044         | 
+| Wind Turbine G132 5 Megawats                                                                                                       | Electrical Equipment and Machinery | 3276187         | 
+| Wind Turbine G114 2 Megawats                                                                                                       | Electrical Equipment and Machinery | 1532608         | 
+| Wind Turbine G90 2 Megawats                                                                                                        | Electrical Equipment and Machinery | 1251625         | 
+| Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.                                                                 | Automobiles & Components           | 191687          | 
+| Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall | Materials                          | 167000          | 
+| TCDE                                                                                                                               | Materials                          | 99075           | 
+| Mercedes-Benz GLE (GLE 500 4MATIC)                                                                                                 | Automobiles & Components           | 91000           | 
+| Mercedes-Benz S-Class (S 500)                                                                                                      | Automobiles & Components           | 85000           | 
+| Mercedes-Benz SL (SL 350)                                                                                                          | Automobiles & Components           | 72000           | 
 
 ### 3. What are the industries with the highest contribution to carbon emissions?
 ```sql
@@ -151,3 +153,4 @@ limit 10;
 | South Africa | 1119.2727                   | 
 | Ireland      | 855.0000                    | 
 | Indonesia    | 721.0000                    | 
+
