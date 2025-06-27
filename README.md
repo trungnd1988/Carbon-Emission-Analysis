@@ -1,5 +1,6 @@
 # Carbon-Emission-Analysis
 ![image](https://github.com/user-attachments/assets/6f52ab70-159d-425f-9165-a1b6b6801573)
+
 This report aims to analyze carbon emissions to examine the carbon footprint across various industries. We aim to identify sectors with the highest levels of emissions by analyzing them across countries and years, as well as to uncover trends.
 
 Carbon emissions play a crucial role in the environment, accounting for over 75% of global emissions and posing a significant environmental challenge. These emissions contribute to the accumulation of greenhouse gases in the atmosphere, leading to climate change, planetary warming, and involvement in various environmental disasters.
@@ -12,7 +13,8 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 ![image](https://github.com/user-attachments/assets/8e138585-8d0c-42ee-b1a3-528701d1b098)
 ##Data Exploring
 ###Table 'product_emissions'
-```select *
+```sql
+select *
 from product_emissions
 limit 10;
 ```
@@ -28,3 +30,6 @@ limit 10;
 | 10418-1-2013  | 84         | 9          | 19                | 2013 | Portland Cement                                                 | 1000      | 1102                 | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | 
 | 10661-10-2014 | 85         | 28         | 11                | 2014 | Regular Straight 505® Jeans – Steel (Water                      | 0.7665    | 15                   | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | 
 | 10661-10-2015 | 85         | 28         | 6                 | 2015 | Regular Straight 505® Jeans – Steel (Water                      | 0.7665    | 15                   | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | 
+###Table 'industry_groups'
+
+
