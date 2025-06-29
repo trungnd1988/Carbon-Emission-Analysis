@@ -77,7 +77,7 @@ from product_emissions
 group by 
 	id,
 	company_id,
-	country_id
+	country_id,
 	industry_group_id,
 	year,
 	product_name,
@@ -92,10 +92,10 @@ having count(*) > 1;
 
 ### 1. Which products contribute the most to carbon emissions? 
 ```sql
-select product_name,round(avg(carbon_footprint_pcf))
+select product_name,round(avg(carbon_footprint_pcf),2) as 'Carbon Emission'
 from product_emissions
 group by product_name
-order by round(avg(carbon_footprint_pcf)) desc;
+order by round(avg(carbon_footprint_pcf),2) desc;
 ```
 | product_name                                                                                                                       | round(avg(carbon_footprint_pcf)) | 
 | ---------------------------------------------------------------------------------------------------------------------------------: | -------------------------------: | 
